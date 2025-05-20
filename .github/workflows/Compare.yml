@@ -1,0 +1,26 @@
+name: Variables Demo
+
+# Workflow-Level Variable
+env:
+  MY_VARIABLE: "This is  WORKFLOW level stage"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  scope-demo:
+    name: Step scope vs workflow scope
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Workflow-Level Variable print
+        run: |
+          echo "MY_VARIABLE: $MY_VARIABLE"
+
+      - name: Override the step-level Variable
+        env:
+          MY_VARIABLE: "This is the  STEP level. Overrinding workflow variable"
+        run: |
+          echo "MY_VARIABLE: $MY_VARIABLE"
